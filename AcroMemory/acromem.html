@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AcroMemory</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="logo">AcroMemory</h1>
+        </div>
+        <div class="chat-box">
+            <h2 class="output-heading">Your acronym is:</h2>
+            <div class="chat-content" id="chat-content">
+                <!-- Output will be displayed here -->
+            </div>
+            <form class="input-box" action="/generate" method="post">
+                <input type="text" id="input-prompt" placeholder="Enter your prompt...">
+                <button type="submit">Generate</button>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
