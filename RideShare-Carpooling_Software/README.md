@@ -35,7 +35,7 @@ Follow the official Flutter installation guide: [Flutter Installation](https://f
    - Choose a system image and click `Next`.
    - Adjust the AVD properties as needed and click `Finish`.
 
-3. **Start the Emulator**:
+3. **Start the Emulator** :
    - Open `AVD Manager`.
    - Click the play button next to your virtual device to start the emulator.
 
