@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Webpage Title</title>
+    {% load static %}
+    <style>
+        .button {
+    background-color: #4CAF50;
+    padding: 10px 20px;    /* Green color for button */
+    color: white;
+    text-decoration: none;  /* Removes underline */
+    border: none;  /* Removes default button border */
+    border-radius: 4px; 
+    margin: 10px;  /* Adds margin around the button */
+  }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 10px;
+            background-color: transparent;
+            opacity: 0.7;
+        }
+        .logo img {
+            max-width: 100px;
+            height: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 10px;
+        }
+        .buttons {
+            position: fixed;
+            top: 0;
+            right: 0;
+            padding: 10px;
+        }
+        .buttons button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .get-started-container {
+            border: 2px solid white;
+            border-radius: 5px;
+            padding: 5px;
+            display: inline-block;
+        }
+        .get-started {
+            color: white;
+        }
+        .container {
+            background-color: rgb(82, 169, 82);
+            padding: 100px;
+            color: white;
+            position: relative;
+            min-height: 20vh;
+        }
+        .container h2,
+        .container h3,
+        .container p {
+            margin-left: -75px;
+            position: absolute;
+            bottom: 20px;
+        }
+        .container h2 {
+            bottom: 25%;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        .container h3 {
+            bottom: 10%;
+            font-family: monospace;
+            font-weight: 100;
+        }
+        .container p {
+            bottom: 4%;
+            font-family: sans-serif;
+        }
+        .white-section {
+            background-color: #FFFFFF;
+            padding: 20px;
+            text-align: center;
+        }
+        .white-section .button-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .white-section button {
+            background-color: white;
+            color: #289a28;
+            border: none;
+            padding: 20px 40px;
+            margin-right: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            font-size: 16px;
+        }
+        .white-section button:hover {
+            background-color: #289a28;
+            color: white;
+        }
+        .white-section button:last-child {
+            margin-right: 0;
+        }
+        .white-section button:not(:last-child) {
+            background-image: url('{% static "button.png" %}');
+            background-repeat: no-repeat;
+            background-size: contain;
+            padding-left: 60px;
+            padding-right: 30px;
+        }
+        .input {
+            overflow-y: scroll;
+        }
+        .dialog {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            overflow-x: auto;
+            max-height: 80%;
+            max-width: 80%;
+        }
+        .dialog h2 {
+            margin-bottom: 20px;
+        }
+        .dialog p {
+            margin-bottom: 20px;
+        }
+        .dialog .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+        .dialog table {
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        .dialog tr {
+            width: 100%;
+        }
+        .dialog th, .dialog td {
+            border: 1px solid #289a28;
+            padding: 10px;
+            text-align: center;
+            width: fit-content;
+            min-width: 100px;
+        }
+        .dialog th {
+            background-color: #289a28;
+            color: white;
+        }
+        .dialog .text-above-close {
+            margin-bottom: 10px;
+        }
+        .green-container {
+            background-color: rgb(255, 255, 255);
+            padding: 40px 0;
+            text-align: center;
+        }
+        .white-heading {
+            color: #289a28;
+            font-size: 24px;
+            margin: 0;
+            margin-left: 10px;
+            padding-left: 10px;
+            text-align: left;
+            /* position: relative; */
+            /* top: -20px;
+            left: -480px; */
+        }
+        .green-container .graph-buttons {
+            margin-top: 37px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .green-container .graph-buttons button {
+            background-color: #FFFFFF;
+            color: rgb(82, 169, 82);
+            border: 2px solid rgb(82, 169, 82);
+            padding: 0px 20px;
+            margin-right: 11px;
+            margin-bottom: 53px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            font-size: 16px;
+            flex: 0 0 calc(50% - 10px);
+            margin-top: -18px;
+        }
+        .green-container .graph-buttons button:hover {
+            background-color: rgb(155, 231, 155);
+            color: #FFFFFF;
+        }
+        .green-container .graph-buttons button:last-child {
+            margin-right: 0;
+        }
+        .green-line {
+            width: 100%;
+            height: 2px;
+            background-color: rgb(82, 169, 82);
+        }
+        .new-container {
+            display: flex;
+            flex-direction: row;
+            gap: 150px;
+        }
+        .new-container img {
+            width: 35vw;
+            padding: 40px;
+        }
+        .generate-report-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .generate-report {
+            background-color: #289a28;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            margin-bottom: 20px;
+        }
+        .generate-report:hover {
+            background-color: #3cb043;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="buttons">
+                <button id="contactUsButton">Contact Us</button>
+
+<script>
+    document.getElementById("contactUsButton").addEventListener("click", function() {
+        window.location.href = "/contact";
+    });
+</script>
+
+                <div class="get-started-container">
+                    <button id="profileButton">My Profile</button>  <script>
+                        document.getElementById("profileButton").addEventListener("click", function() {
+                          window.location.href = "/doctor";
+                        });
+                      </script>
+                      
+                </div>
+            </div>
+        </div>
+        <div class="logo">
+            <img src='{% static "logo.png" %}' alt="Logo">
+        </div>
+        <h2>{{ patientdata.patientname }}</h2>
+        <h3>age: {{ patientdata.age }}</h3>
+        <p>{{ patientdata.relevantinfo }}</p>
+    </div>
+    <div class="white-section">
+        <div class="button-container"></div>
+        <div id="week-dialog" class="dialog">
+            <span class="close-btn" onclick="closeWeekDialog()">&times;</span>
+            <h2>Week Data</h2>
+            <div class="input">
+                <table>
+                    <thead>
+                        <tr><th>Baseline Fetal Heart Rate</th>
+                            <th>Accelerations</th>
+                            <th>Fetal movement</th>
+                            <th>Uterine contractions</th>
+                            <th>Light decelerations</th>
+                            <th>Severe deceleration</th>
+                            <th>Prolongued deceleration</th>
+                            <th>Percentage of time with Abnormal short term variability</th>
+                            <th>Mean value of short term variability</th>
+                            <th>Percentage of time with abnormal long term variability</th>
+                            <th>Mean value of long term variability</th>
+                            <th>Histogram width</th>
+                            <th>Histogram min</th>
+                            <th>Histogram max</th>
+                            <th>No.of peaks in exam histogram</th>
+                            <th>No.of zeroes in exam histogram</th>
+                            <th>Histogram mode</th>
+                            <th>Histogram mean</th>
+                            <th>Histogram median</th>
+                            <th>Histogram variance</th>
+                            <th>Histogram trend</th>
+                            </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <p class="text-above-close"></p>
+        </div>
+        <div id="add-week-dialog" class="dialog">
+            <span class="close-btn" onclick="closeAddWeekDialog()">&times;</span>
+            <h2>Add Week Data</h2>
+            <div class="input">
+            <form id="week-form">
+                <table>
+                    <thead>
+                        <tr></tr>
+                    </thead>
+                    <tbody>
+                        <tr></tr>
+                    </tbody>
+                </table>
+               
+            </form>
+        </div>
+        <button id='submit-week-form' type="submit">Submit</button>
+        
+        </div>
+    </div>
+    <div class="green-line"></div>
+    <div class="green-container">
+        <h2 class="white-heading">Graph Generation</h2>
+        <div class="new-container">
+            <div>
+                <img src='{% static "patient.png" %}' alt="My image">
+            </div>
+            <div class="graph-buttons">
+                <button id="button1">HEART RATE</button>
+                <script>
+                    document.getElementById("button1").addEventListener("click", function() {
+                        window.location.href = "/chart/"+ '{{ patientdata.uuid }}' + "/"+"0/";
+                    });
+                 </script>
+                <button id="button2">ACCELERATIONS PER SEC</button>
+                <script>
+                    document.getElementById("button2").addEventListener("click", function() {
+                        window.location.href = "/chart/"+ '{{ patientdata.uuid }}' + "/"+"1/";
+                    });
+                 </script>
+                <button id="button3">UTERINE CONTRACTIONS PER SEC</button>
+                <script>
+                    document.getElementById("button3").addEventListener("click", function() {
+                        window.location.href = "/chart/"+ '{{ patientdata.uuid }}' + "/"+"3/";
+                    });
+                 </script>
+                <button id="button4">% OF TIME WITH ABNORMAL SHORT-TERM VARIABILITY</button>
+                <script>
+                    document.getElementById("button4").addEventListener("click", function() {
+                        window.location.href = "/chart/"+ '{{ patientdata.uuid }}' + "/"+"7/";
+                    });
+                 </script>
+                <button id="button5">% OF TIME WITH ABNORMAL LONG-TERM VARIABILITY</button>
+                <script>
+                    document.getElementById("button5").addEventListener("click", function() {
+                        window.location.href = "/chart/"+ '{{ patientdata.uuid }}' + "/"+"9/";
+                    });
+                 </script>
+            </div>
+        </div>
+    </div>
+    <div class="green-line"></div>
+    <div class="generate-report-container">
+        <button class="button" id="generateReportButton">Generate Report</button>
+
+
+
+    </div>
+    
+
+
+    <script>
+        const generateButton = document.getElementById('generateReportButton');
+        generateButton.addEventListener('click', function() {
+            window.location.href = '/view_report/'+ '{{ patientdata.uuid }}' + '/';
+        });
+
+
+        
+
+       var weekdatas = JSON.parse('{{ weekdatas | safe }}');
+        console.log(weekdatas);
+        console.log('weekdatas ',weekdatas)
+        const weekData = {};
+        const weekabnormalData = {};
+        const weekNames = [];
+        for (week in weekdatas) {
+        
+            weekData[weekdatas[week].fields.week_name] = weekdatas[week].fields.numbers;
+            weekabnormalData[weekdatas[week].fields.week_name] = weekdatas[week].fields.abnormality;
+            weekNames.push(weekdatas[week].fields.week_name);
+        }
+        console.log(weekData);
+        console.log(weekabnormalData);
+        console.log(weekNames);
+        
+        const columnNames = ['Baseline Fetal Heart Rate', 'Accelerations', 'Fetal movement', 'Uterine contractions', 'Light decelerations', 'Severe deceleration', 'Prolongued deceleration', 'Percentage of time with Abnormal short term variability', 'Mean value of short term variability', 'Percentage of time with abnormal long term variability', 'Mean value of long term variability', 'Histogram width', 'Histogram min', 'Histogram max', 'No.of peaks in exam histogram', 'No.of zeroes in exam histogram', 'Histogram mode', 'Histogram mean', 'Histogram median', 
+        'Histogram variance', 'Histogram trend'];
+        
+        const processNumbersUrl = '{{ process_inetegers_url }}';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttonContainer = document.querySelector('.button-container');
+            const weekDialogTable = document.querySelector('#week-dialog table');
+            const addWeekDialogTable = document.querySelector('#add-week-dialog table');
+
+            // Generate week buttons
+            function renderWeekButtons() {
+                buttonContainer.innerHTML = ''; // Clear the button container
+
+                weekNames.forEach((weekName, index) => {
+                    console.log(weekName);
+                    const button = document.createElement('button');
+                    button.textContent = weekName;
+                    button.id = `week${index + 1}`;
+                    button.addEventListener('click',() => openWeekDialog(weekName));
+                    buttonContainer.appendChild(button);
+                });
+
+                // Generate add week button
+                const addWeekButton = document.createElement('button');
+                addWeekButton.textContent = 'Add Week';
+                addWeekButton.id = 'add-week';
+                addWeekButton.addEventListener('click', openAddWeekDialog);
+                buttonContainer.appendChild(addWeekButton);
+        }
+        renderWeekButtons();
+            // Generate table headers
+            // const headerRow = weekDialogTable.querySelector('thead tr');
+            // columnNames.forEach(columnName => {
+            //     const th = document.createElement('th');
+            //     th.textContent = columnName;
+            //     headerRow.appendChild(th);
+            // });
+
+            const addWeekHeaderRow = addWeekDialogTable.querySelector('thead tr');
+            columnNames.forEach(columnName => {
+                const th = document.createElement('th');
+                th.textContent = columnName;
+                addWeekHeaderRow.appendChild(th);
+            });
+
+            // Generate table cells for the week dialog
+            // const weekDialogBody = weekDialogTable.querySelector('tbody');
+            // weekDialogBody.innerHTML = '';
+
+            // Generate table cells for the add week dialog
+            const addWeekDialogBody = addWeekDialogTable.querySelector('tbody');
+            const addWeekRow = document.createElement('tr');
+            columnNames.forEach(columnName => {
+                const td = document.createElement('td');
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.name = `column_${columnNames.indexOf(columnName) + 1}`;
+                td.appendChild(input);
+                addWeekRow.appendChild(td);
+            });
+            addWeekDialogBody.appendChild(addWeekRow);
+            
+            function renderWeekData(weekName) {
+                const weekDialogBody = weekDialogTable.querySelector('tbody');
+                weekDialogBody.innerHTML = ''; // Clear the table body
+
+                if (weekData[weekName]) {
+                    const weekRow = document.createElement('tr');
+                    const weekDataArray = weekData[weekName];
+    
+
+                    columnNames.forEach(columnName => {
+                        const td = document.createElement('td');
+                        td.style.border = '1px solid #289a28';
+                        const index = columnNames.indexOf(columnName);
+                        td.textContent = weekDataArray[index] || '0';
+                        weekRow.appendChild(td);
+                    });
+                    week_abnormal_data = weekabnormalData[weekName];
+
+                    const interpretationElement = document.querySelector('#week-dialog .text-above-close');
+                    interpretationElement.textContent = `Result: ${week_abnormal_data   }`;
+
+
+                    weekDialogBody.appendChild(weekRow);
+                }
+            }
+
+            function openWeekDialog(weekName) {
+                console.log(weekName+"work?");
+                renderWeekData(weekName);
+                document.getElementById('week-dialog').style.display = 'block';
+            }
+//working of week button
+            function closeWeekDialog() {
+                document.getElementById('week-dialog').style.display = 'none';
+            }
+
+            function openAddWeekDialog() {
+                document.getElementById('add-week-dialog').style.display = 'block';
+            }
+
+            function closeAddWeekDialog() {
+                document.getElementById('add-week-dialog').style.display = 'none';
+            }
+
+            function closeWeekDialog() {
+                document.getElementById('week-dialog').style.display = 'none';
+            }
+
+            document.getElementById('submit-week-form').addEventListener('click', (event) => {
+                event.preventDefault();
+                const form = document.getElementById('week-form')
+                const formData = new FormData(form);
+                const weekDataArray = [];
+
+                for (let i = 1; i <= columnNames.length; i++) {
+                    const value = formData.get(`column_${i}`);
+                    if (value) {
+                        const numericValue = parseFloat(value);
+                        if (!isNaN(numericValue)) {
+                            weekDataArray.push(numericValue);
+                        }
+                    }
+                }
+                const weekIndex = weekNames.length;
+                const weekName = `Week ${weekIndex + 1}`;
+                console.log(weekDataArray);
+                console.log(processNumbersUrl);
+                fetch("http://127.0.0.1:8000/process_integers/", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    body: JSON.stringify({ integers: weekDataArray, weekName: weekName, uuid_: '{{ uuid_ }}'})
+                })
+                .then(response=> {
+                    console.log(response);
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.error) {
+                        console.error(`Error: ${data.error}`);
+                    } else {
+                        console.log(`Result: ${data.result}`);
+                        // const weekIndex = weekNames.length;
+                        // const weekName = `Week ${weekIndex + 1}`;
+                        weekNames.push(weekName);
+                        console.log(weekNames);
+                        console.log(weekIndex);
+                        console.log(weekName);
+                        const weekDialogBody = weekDialogTable.querySelector('tbody');
+                        const weekRow = document.createElement('tr');
+                        weekData[weekName] = weekDataArray;
+                        weekabnormalData[weekName] = data.result;
+                        console.log(weekData);
+
+                        columnNames.forEach(columnName => {
+                            const td = document.createElement('td');
+                            const index = columnNames.indexOf(columnName);
+                            td.textContent = weekDataArray[index] || '';
+                            weekRow.appendChild(td);
+                        });
+
+                        weekDialogBody.appendChild(weekRow);
+
+                        const interpretationElement = document.querySelector('#week-dialog .text-above-close');
+                        interpretationElement.textContent = `Result: ${data.result}`;
+
+
+                       
+                        form.reset();
+                        renderWeekButtons();
+                        closeAddWeekDialog();
+                    }
+                })
+                .catch(error => {
+                    console.error(`Error: ${error}`);
+                });
+            });
+        });
+    </script>
+    
+    <script>
+       
+        function closeWeekDialog() {
+            document.getElementById('week-dialog').style.display = 'none';
+        }
+        function openAddWeekDialog() {
+            document.getElementById('add-week-dialog').style.display = 'block';
+        }
+        function closeAddWeekDialog() {
+            document.getElementById('add-week-dialog').style.display = 'none';
+        }
+        
+        
+    </script>
+</body>
+</html>
