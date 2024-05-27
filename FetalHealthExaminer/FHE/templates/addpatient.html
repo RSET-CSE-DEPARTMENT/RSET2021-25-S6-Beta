@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>patient deatails</title>
+  <style>
+    /* Basic styles for the page */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;  /* Center the content horizontally */
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .contact-info {
+      margin-bottom: 20px;
+    }
+
+    .contact-info p {
+      margin-bottom: 5px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px; /* Add spacing between form elements */
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input, textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #289a28;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Patient Details</h1>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" required>
+      <label for="age">age:</label>
+      <input type="age" id="age" required>
+      <label for="relevent medical details">relevent medical details:</label>
+      <textarea id="message" rows="5" required></textarea>
+      <button type="submit">submit</button>
+    </form>
+  </div>
+  <script>
+    // Add an event listener to the form
+    document.querySelector('form').addEventListener('submit', function(event) {
+      // Prevent the default form submission
+      event.preventDefault();
+
+      // Get the values of the form inputs
+      const name = document.querySelector('#name').value;
+      const age = document.querySelector('#age').value;
+      const message = document.querySelector('#message').value;
+      console.log(name, age, message);
+      // Log the values to the console
+      fetch('http://127.0.0.1:8000/add_patient/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify({
+          patientname: name,
+          age: age,
+          relevantinfo: message,
+        }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+          alert('Patient added successfully!');
+          window.location.href = '/doctor';
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          alert('An error occurred. Please try again later.');
+        });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Medical Report</title>
+    
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+            
+          
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #289a28;
+            color: #fff;
+            padding: 20px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header img {
+            height: 60px;
+            width: auto;
+        }
+
+        .report-section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+           
+            
+        }
+
+        .line-separator {
+            border-top: 3px solid #289a28;
+            margin-bottom: 10px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        footer {
+            background-color: #289a28;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+      *{
+        box-sizing: border-box;
+      }   
+      .column{
+    
+        float: left;
+        width: 40%;
+    height: 300px; /* Add some extra height for the description */
+    margin-left: 20px;
+    margin: 30px;
+      }
+
+ 
+
+.column canvas {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.store-user {
+    font-size: medium;
+ }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    {% load static %}
+</head>
+<body>
+    
+    <div class="container" >
+        <div id="pdf">
+        <header>
+            <div class="header-info">
+                <h1>FETAL HEALTH REPORT</h1>
+            </div>
+            <div class="header-logo">
+                <img src='{% static "logo.png" %}'>
+            </div>
+        </header>
+
+        <div class="report-section">
+            <section class="store-user mt-5" style="color:#289a28;">
+                <div class="col-12">
+                    <div class="row bb pb-3">
+                        <div class="col-5">                          
+                            <h5><strong>Doctor: {{ userdata }}</strong></h5>                          
+                        </div>
+                        <div class="col-7">                          
+                            <h5><strong><span style="width: 40px;"></span>Contact No: {{ userdata.phone_number }}</strong></h5>
+                        </div>
+                        <div class="col-10">                          
+                            <h5><strong>Patient: {{ patientdata }}</strong></h5>
+                        </div>
+                        <div class="col-10">                          
+                            <h5><strong>Age: {{ patientdata.age }} </strong></h5>
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+            
+        
+
+            <div class="line-separator"></div> <!-- Line separator -->
+<div style="color:#289a28;">
+            <p><strong>INTERPRETATION: <span id="interpretation"></span></strong></p>
+            <p><span id="description"></span></p>
+            <p><strong>RESULT:  </strong></p>
+
+
+            <div class="row">
+                <div class="column">
+                    <canvas id="graph1"></canvas>
+                    <div class="desc"></div>
+                </div>
+            
+                <div class="column">
+                    <canvas id="graph2"></canvas>
+                    <div class="desc"></div>
+                </div>
+            
+                <div class="column">
+                    <canvas id="graph3"></canvas>
+                    <div class="desc"></div>
+                </div>
+            
+                <div class="column">
+                    <canvas id="graph4"></canvas>
+                    <div class="desc"></div>
+                </div>
+            
+                <div class="column">
+                    <canvas id="graph5"></canvas>
+                    <div class="desc"></div>
+                </div>
+            </div>
+
+
+            
+        </div>
+        
+        
+        <footer>
+            <p>&copy; Hoping to help - fetalhealthexaminer@gmail.com -</p>
+        </footer>
+    </div>
+
+    </div>
+    <div style="color:#7ed957 ; text-align: center; margin: 20px;">
+       
+            <button type="button" id="generate-button" class="btn btn-success" >Download Report</button>
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function drawGraph(canvasId, yValues, xValues, label) {
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext('2d');
+
+    // Set canvas dimensions
+    canvas.width = 300;
+    canvas.height = 300;
+
+    // Define the data
+    const data = {
+        labels: xValues,
+        datasets: [{
+            label: label,
+            data: yValues,
+            backgroundColor: 'rgba(40, 154, 40, 0.6)',
+            borderColor: 'rgba(40, 154, 40, 1)',
+            borderWidth: 1
+        }]
+    };
+
+    // Configure the chart
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        boxWidth: 10,
+                        font: {
+                            size: 10 // Adjust the font size for the legend labels
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    // Create the chart
+    new Chart(ctx, config);
+}
+const graph1 =[ ] //0
+const graph2 =[ ] //1
+const graph3 =[ ] //3
+const graph4 =[ ] //7
+const graph5 =[ ] //9
+const index = [ ]
+const weekdatas = JSON.parse('{{ weekdatas|safe }}');
+console.log(weekdatas);
+var count = 1;
+for (const week in weekdatas) {
+    graph1.push(weekdatas[week].fields.numbers[0]);
+    graph2.push(weekdatas[week].fields.numbers[1]);
+    graph3.push(weekdatas[week].fields.numbers[3]);
+    graph4.push(weekdatas[week].fields.numbers[7]);
+    graph5.push(weekdatas[week].fields.numbers[9]);
+    index.push(count);
+    count++;
+}
+console.log(graph1, graph2, graph3, graph4, graph5);
+console.log(index);
+const doctor = '{{ userdata }}';
+
+const abnormality = weekdatas[count-2].fields.abnormality;
+var desc = '';
+document.getElementById('interpretation').innerText = weekdatas[count-2].fields.abnormality;
+if (abnormality == 'Normal'){
+    desc = "Routine prenatal care should be continued. This includes attending regular check-ups and following medical advice provided by healthcare professionals. Maintaining a healthy lifestyle, which encompasses a balanced diet, regular physical activity, and sufficient rest, is crucial. It's important to avoid harmful substances such as alcohol and tobacco."
+} else if( abnormality == 'Abnormal') {
+    desc = "Prioritizing rest with 7-9 hours of sleep per night and short daytime naps is crucial. Opt for moderate exercises like walking or prenatal yoga while avoiding strenuous activities. Maintain a balanced diet rich in fruits, vegetables, and lean proteins, and stay hydrated with 8-10 glasses of water daily. Steer clear of alcohol, tobacco, and drugs to safeguard fetal health.additional diagnostic test  fetal ultrasound recommeded."
+}
+else{
+    desc = "Following a pathological classification of fetal health, immediate medical attention is vital. Additional diagnostic tests may be needed, possibly leading to specialist consultations. Continuous monitoring and adherence to medical advice are essential. Lifestyle modifications, including rest, diet, and avoiding harmful substances, support fetal health. Attend follow-up appointments and seek emotional support as needed from healthcare providers and loved ones."
+}
+document.getElementById('description').innerText = desc;
+drawGraph('graph1', graph1, index, 'HEART RATE');
+drawGraph('graph2', graph2, index, 'ACCELERATIONS PER/S');
+drawGraph('graph3', graph3, index, 'UTERINE CONTRACTION PER/S');
+drawGraph('graph4', graph4, index, '% OF TIME WITH ABNORMAL SHORT-TERM VARIABILITY');
+drawGraph('graph5', graph5, index, '% OF TIME WITH ABNORMAL LONG-TERM VARIABILITY');
+    
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.5.2/dom-to-image.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+$('#btn-generateQR').click(function () {
+    let inputValue = $('#QRCode').val().trim()
+    $('#displayImg').html(
+        `
+        <h4>Output QR Image:</h4>
+        <img id="linkQR" src="https://chart.googleapis.com/chart?cht=qr&choe=UTF-8&chs=150x150&chl=${inputValue}"/>
+        `
+    )
+    $('#btn-downloadQR').show()
+})
+
+$('#generate-button').click(function () {
+    domtoimage
+        .toJpeg(document.getElementById('pdf'), {
+            quality: 0.95
+        })
+        .then(function (dataUrl) {
+            let link = document.createElement('a')
+            link.download = 'imageQR.jpeg'
+            link.href = dataUrl
+            link.click()
+        })
+})
+
+})
+</script>
+
+</body>
+</html

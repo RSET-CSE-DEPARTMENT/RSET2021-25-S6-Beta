@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr. {{ userdata.user }} - Patient List</title>
+  {% load static %} 
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: white;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .upper-half {
+      background-color: rgb(82, 169, 82);
+      height: 50vh; /* Set height to 50% of viewport height */
+      padding: 50px;
+      color: white;
+      position: relative;
+      display: flex; /* Use flexbox for positioning */
+      flex-direction: column; /* Stack elements vertically */
+      justify-content: flex-end; /* Align bottom */
+    }
+    .doctor-info {
+      text-align: left; /* Align text left within doctor-info */
+      margin-bottom: 10px; /* Add some space between elements */
+    }
+    .uploaded-image {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      max-width: 100px; /* Set a maximum width for uploaded image */
+      max-height: 100px; /* Set a maximum height for uploaded image */
+    }
+  </style>
+</head> 
+<body>
+  <div class="upper-half">
+    <img src='{% static "logo.png" %}' alt="Hospital Logo" class="uploaded-image">
+    <h2> </h2>
+    <div class="doctor-info">
+      <h1>Dr. {{ userdata.user }}</h1>
+      <h3> {{ userdata.specialization }}</h3>
+      <h4>{{ userdata.hospital }}</h4>
+    </div>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Patient Name</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+     
+      <script>
+
+        console.log('{{ doctordata }}')
+        const patientdatas =JSON.parse('{{ patientdatas|safe }}');
+        console.log(patientdatas);
+         for (let patient in patientdatas) {
+          console.log(patient);
+          console.log(patientdatas[patient]);
+          const row = document.createElement('tr');
+          
+          const patientName = document.createElement('td');
+          const patientLink = document.createElement('a');
+          patientLink.href = '/patient/' + patientdatas[patient].fields.uuid + '/';
+          patientLink.textContent = patientdatas[patient].fields.patientname;
+          patientName.appendChild(patientLink);
+          row.appendChild(patientName);
+          
+          // const lastVisited = document.createElement('td');
+          // lastVisited.textContent = '{{ patient.fields.last_visited }}';
+          // row.appendChild(lastVisited);
+          
+          const deleteButton = document.createElement('td');
+          const deleteButtonElement = document.createElement('button');
+          deleteButtonElement.className = 'delete-button';
+          deleteButtonElement.textContent = 'Delete';
+          deleteButton.appendChild(deleteButtonElement);
+          row.appendChild(deleteButton);
+          deleteButton.addEventListener('click', function() {
+            fetch('/deletepatient/' + patientdatas[patient].fields.uuid + '/', {
+              method: 'DELETE',
+              headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+              }
+            })
+            .then(response => {
+              if (response.ok) {
+                row.remove();
+              }
+            });
+          });
+          
+          document.querySelector('tbody').appendChild(row);
+         }
+      </script>
+    </tbody>
+  </table>
+  <div style="text-align: left; margin-top: 10px;">
+    <button id="new-patient-button">New Patient</button>
+  </div>
+  <script>
+  const newPatientButton = document.getElementById('new-patient-button');
+newPatientButton.addEventListener('click', function() {
+  window.location.href = '/addpatient';
+});
+</script>
+</body>
+</html>

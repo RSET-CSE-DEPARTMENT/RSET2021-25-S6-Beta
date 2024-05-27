@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetal Health Examiner</title>
+  <style>
+    /* General Styles */
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Header Styles */
+  header {
+    background-color: #f0f0f0;
+    padding: 20px;
+  }
+  .logo {
+    position: absolute;  /* Makes the logo positioned independently */
+    top: 10px;            /* Adjusts vertical distance from the top */
+    left: 10px;           /* Adjusts horizontal distance from the left */
+    width: auto;          /* Maintains logo aspect ratio */
+    height: 50px;        /* Adjusts logo height as needed */
+  }
+  body {
+    background-color: #90EE90;
+  }
+  .top-right {
+    position: absolute;
+    top: 10px;
+    right: 10px;  /* Positions to top right corner */
+   /* Adjusts padding for button size */
+     /* Green color for button */
+     padding: 10px ;    
+    color: white;
+    text-decoration: none;  /* Removes underline */
+    border: none;  /* Removes default button border */
+    border-radius: 4px;  /* Adds rounded corners */
+  }
+
+  .button {
+    background-color: #4CAF50;
+    padding: 10px 20px;    /* Green color for button */
+    color: white;
+    text-decoration: none;  /* Removes underline */
+    border: none;  /* Removes default button border */
+    border-radius: 4px; 
+    margin: 10px;  /* Adds margin around the button */
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  nav a {
+    padding: 10px 20px;
+  }
+  
+  .hero {
+    text-align: center;
+    padding: 50px 0;
+  }
+  
+  h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  /* Main Content Styles */
+  main {
+    padding: 50px 0;
+    overflow-y: scroll; /* Enable scrolling for main content */
+    height: calc(100vh - 150px); /* Set main content height (adjust as needed) */
+  }
+  
+  section {
+    margin-bottom: 50px;
+  }
+  
+  h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .features ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .features li {
+    margin-bottom: 10px;
+  }
+  
+  /* Call to Action Styles */
+  .call-to-action {
+    text-align: center;
+  }
+  
+  .call-to-action a {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Footer Styles */
+  footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow footer content to wrap on smaller screens */
+  }
+  
+  .social-media {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .social-media li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  #graph
+  {width:50%;}
+  </style>
+  {% load static %}
+</head>
+<body>
+    <body>
+        <div class="top-green"></div>
+    </body>
+      
+    <header class="hero">
+    <img src="{% static 'logo.png' %}" alt="Fetal Health Examiner Logo" class="logo"> 
+  <header class="hero">
+    <img src="{% static 'back.jpg' %}" alt="Pregnant woman"> <h1>Fetal Health Examiner</h1>
+    <p>Welcome to your one-stop resource for a healthy pregnancy!</p> 
+    <p> Website empowers expectant parents with trusted information on fetal development, prenatal care, and healthy habits for mom and baby.</p> 
+    <p> Valuable resources, connect with fetal health experts, and embark on this incredible journey with confidence.</p>
+    <div class="top-right">
+        <a href="/contact" class="button">Contact Us</a>
+        <a href="/signup" class="button">Get Started</a>
+    </div>
+     </header>
+  </header> 
+  <section class="about-us">
+    <h2>About Us</h2>
+    <img src="{% static 'dp.jpg' %}" alt="Team photo"> </section>
+    <h2 class="h2 cc-centre"><span class="text-span"><strong>• DOCTOR DASHBOARD AND PATIENT MANAGEMENT •</strong></span> </h2>
+    <p>This feature enables doctors to log in, access patient information, and manage CTG</p>
+    <p>data for each patient, further helps to track and monitor patients health</p>
+    <img id="graph" src="{% static 'graph.png' %}" alt="Team photo"> </section>
+    <h2 class="h2 cc-centre"><span class="text-span"><strong>• GRAPH GENERATION •</strong></span> </h2>
+    <p>This feature enables users to generate graphs for visualizing CTG data, including parameters such as baseline fetal heart rate, </p>
+    <p>number of acceleration per second, numberof uterine contractions per second, percentage of time with </p>
+    <p>abnormal short-term variability, and percentage of time with abnormal long-term variablity.</p>
+
+  <section class="services">
+    <h2>Services</h2>
+    <ul>
+      <li>Information on fetal development</li>
+      <li>Prenatal care resources</li>
+      <li>Healthy habits for mom and baby</li>
+      <li>Connection with fetal health experts</li>
+    </ul>
+  </section>
+
+  <section class="resources">
+    <h2>Resources</h2>
+    <p>Find valuable links for expectant parents here.</p>
+    </section>
+
+  
+
+  <footer>
+    <p>&copy; 2024 Fetal Health Examiner. All Rights Reserved.</p>
+    <a href="#">Terms of Use</a>
+    <a href="#">Privacy Policy</a>
+  </footer>
+</body>
+</html>
