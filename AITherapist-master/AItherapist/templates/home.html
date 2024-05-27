@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Therapist</title>
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=sXhNI2fsXs_KcpiwktsUTSZbhY5SqTldnP1xwfHlwNJ2z7vF1ZymOy1ZluVfOIV1HoVFdKCktt7mBmmk-xqd85X-FBlercWZ84hET0I7rXd5OpGSHtc8ZtPMSHOG-N9j6b0YicGvt-6JfMwcxeo-tcNXJBVu4s4JUxgURFjUyu66SHzWGlStopFkFhOrt72evHItaYT-tQ3mStxEIc3JNXt-6Yn02zwfVuokTJY43WZ_odfwUFLR5Jb4OjxdOpKv4L3VIaYVYwnQsQxIuiQaEVJx6CgBp-uYwdvZD9Ze9j9D-8emmv3xYDoKACHY8A8KH5R9IL1ricpkOGvzUb2f7wkWIo1lMX3kFmm1Yallr0Hzq29KT1bKcYh-uozsJgnn4hPr56F5n1VkXovqFKxlkNCusRx7SHvz1pPkuF4TJoBSDnrQ96fxMGWTgfZC7B-Rf8JaGiEKdD76peDBjLLzHYRKCox-QrPGiSj_vkrEdh-m4rIK1Ky0i0rrt0ETSpVLrHlLiiFxo_f4O0OGb1maDjkOTfqY_56CXP6f3NWtYeJ1W9HgzRsXXwp__GUiF7D7cZgwcEhBG1zpBKfVgVakz0mN9257-igHWe_pWm_SYV-jaiN3LFbfMiPIP5EZ1OKCdqD9aRW0_ubcY2iUDAJHIyxUsZ6ev8PGY7d50PKNv7kQVE7ibFcY_zAOiqzX5enGn-XsznTXNzlcuijGu93N8FlmJO7pXI5MSTDGgi4SVuVAGub-FtqE3zdIhNZcmEZd0V_-oPbqFJV0wAO8-PfUdF9wXkGKwmy1m69rpVk6SXfMU7ZccJegoQFlhJyf1sA9aPGvMWx-2lS-k91dcqDQWd6-gIlu1fxJZZxIh0wG5JC2iqsJBLmcOi90U0y3zpXaFCx-9Gv0XEDfs-l6tGqpn0kaiDzzCbqCDrc-GvAwFHsMn9oTUg0CHwJwY2CPq8zKpNq-TPpyOkyQSI_dTVU1GLxUGROrhe_M3DrXgqX0LLr-ZRrv5ad5FkzsuD0h6Eeu3SwNU_2FhAunkrqNGe9ZQFofjyfvqnfVbD3nadIhzczy0Qjk5lRwzNxFmTGJ5R2FXuq_EHOHvzNidXzoK4cHIL0krMSoUWBcNms_Qf4vJiNsQ__ImcJvheQDcNs5J5ttMCfQLzqxtguV2i-XCTgK_W1TxjSRo8lSQB7DkwAczCsVoRECK4oABKtShPxmiydziqO-egc0C5rW2yZUoVkCYeZd-9B1HkecgJcTlAZNh441AhCJb-PqrSamytjA1LzGfYITrq_cqhpsAorz3RaiyJghh5ZtBipqlCbIAXMAzlPt4Axr5owW9s10qjKQU_BfFP-oOzJG0SkIobfIqI74_Q8M_k79ofUj_NGdtNx--OTDRKY-sKNv0iB989J3Fld0zQ92jPDKREqNoeYcs8woWeGTsWbCa6ZlQDWOoHUAlXV7lJ1le66QHOlZyoGsIB-NTNWzHN_FPXJ_j5F78_g-djCTDHM47bZBADpF2fZIvoJxySza3Te80CquEHPYfJT1Fg5T87OvpV689uUJrF3M3HqpcZcZDFb7WcFCgPRMlPocq4z73durrvK0MyYpfqwnKftMyjcrYD6hkO-hd-N2ELqJSvFLOC6bIv_8HKUOAkQ_ebhUx2y8FxZOFFAcHh-p" nonce="df993c37443ed5403f8fa1954dc8a0af" charset="UTF-8"></script><style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    .hero {
+      background-image: url('{% static "background.jpg" %}'); /* Replace this URL with your image */
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 1.2em;
+      margin-bottom: 40px;
+    }
+    .cta-btn {
+      background-color: royalblue;
+      color: #fff;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1.1em;
+      transition: background-color 0.3s ease;
+    }
+    .cta-btn:hover {
+      background-color:royalblue;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Welcome to AI Therapist</h1>
+      <p>"Embrace Empathy, Embrace Growth: AI Therapist, Your Emotional Ally."</p>
+      <a href="{% url 'signin' %}" class="cta-btn">Start</a>
+    </div>
+  </section>
+
+  <!-- Add more sections for other content -->
+
+</body>
+</html>

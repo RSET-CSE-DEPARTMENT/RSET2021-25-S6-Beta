@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Therapist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<style>
+    * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #f7f7f7;
+}
+
+.chatBot {
+    border: 3px solid royalblue;
+    border-radius: 10px;
+    margin: 50px auto;
+    overflow: hidden;
+    width: 500px;
+    overflow-y: clip;
+    height: 600px;
+    background: rgb(255, 255, 255) url(gfg-gg-logo.svg);
+    background-size: contain;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+header {
+    background-color: royalblue;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 7px 7px 0 0;
+}
+
+header h2 {
+    color: #fff;
+    margin: 0;
+}
+
+.chatbox {
+    padding: 15px;
+    list-style: none;
+    overflow-y: auto;
+    height: 400px;
+}
+
+.chatbox li {
+    margin-bottom: 10px;
+}
+
+.chat p {
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.chat-outgoing p {
+    background-color: #162887;
+    align-self: flex-end;
+    color: #fff;
+}
+
+.chat-incoming p {
+    background-color: #eaeaea;
+}
+
+.chat-input {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.chat-input textarea {
+    width: 522px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    resize: none;
+    outline: none;
+    overflow-y: scroll;
+    background-color: #dcdcdc85;
+    font-size: 16px;
+    color: royalblue;
+    font-weight: 600;
+    margin-top: -10px;
+    margin-left: -15px;
+    height: 71px;
+}
+
+#cross {
+    float: right;
+    position: relative;
+    top: -38px;
+    left: -15px;
+    cursor: pointer;
+    color: white;
+    font-weight: bolder;
+    font-size: 28px;
+}
+
+#cross:hover {
+    color: red;
+    transition: all .5s;
+}
+
+.chatbox .chat p.error {
+    color: #ffffff;
+    background-color: #ff3737e8;
+}
+
+#sendBTN {
+    width: 100%;
+    padding: 8px;
+    border: 0;
+    outline: none;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 7px;
+    background-color: royalblue;
+    cursor: pointer;
+    color: white;
+    margin-top: 12px;
+}
+
+.lastMessage {
+    margin-top: 50px;
+    font-size: 35px;
+    font-weight: 600;
+    color: darkgreen;
+    margin-left: 550px;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url("{% static 'chatbotbg.jpg' %}"); /* Path to your background image */
+    background-size: cover; /* This will ensure the image covers the entire background */
+    background-repeat: no-repeat; /* Prevents the background image from repeating */
+    background-position: center; /* Center the background image */
+  }
+
+</style>
+<body>
+    <div class="chatBot">
+        <header>
+            <h2>AI Therapist</h2>
+            <span alt="Close" id="cross">X</span>
+        </header>
+        <ul class="chatbox">
+            <li class="chat-incoming chat">
+                <p>How are you feeling today?</p>
+            </li>
+        </ul>
+        <div class="chat-input">
+            <textarea id="userFeelings" rows="1" cols="17" placeholder="Enter your feelings..."></textarea>
+            <button id="sendBTN">Send</button>
+        </div>
+    </div>
+    <script>
+        const chatInput = document.querySelector('.chat-input textarea');
+        const sendChatBtn = document.querySelector('#sendBTN');
+        const chatbox = document.querySelector(".chatbox");
+    
+        const createChatLi = (message, className) => {
+            const chatLi = document.createElement("li");
+            chatLi.classList.add("chat", className);
+            chatLi.innerHTML = `<p>${message}</p>`;
+            return chatLi;
+        }
+    
+        const handleChat = () => {
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) {
+                return;
+            }
+    
+            const userChatMessage = createChatLi(userMessage, "chat-outgoing");
+            chatbox.appendChild(userChatMessage);
+            chatbox.scrollTo(0, chatbox.scrollHeight);
+    
+            fetch('http://localhost:5000/get_response', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ 'user_input': userMessage })
+            })
+            .then(response => response.json())
+            .then(data => {
+    // Display the bot response
+    //const botResponse = createChatLi(data.response, "chat-incoming");
+    //chatbox.appendChild(botResponse);
+
+    // Display the quote if it exists
+    if (data.quote) {
+        console.log('Quote received:', data.quote);
+        const quoteResponse = createChatLi(`"${data.quote}"`, "chat-incoming");
+        chatbox.appendChild(quoteResponse);
+    } else {
+        console.log('No quote received');
+    }
+
+    // Scroll to the bottom of the chatbox
+    chatbox.scrollTo(0, chatbox.scrollHeight);
+})
+
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    
+            // Clear the input field
+            chatInput.value = '';
+        }
+    
+        sendChatBtn.addEventListener("click", handleChat);
+        document.getElementById('cross').addEventListener('click', function() {
+            window.location.href = "{% url 'signin' %}"; // Redirect to signin page
+        });
+    </script>
+    
+</body>
+</html>
