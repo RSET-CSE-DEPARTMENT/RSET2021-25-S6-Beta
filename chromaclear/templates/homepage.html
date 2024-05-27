@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ChromaClear</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+      background-image: linear-gradient(to right, #f44336, #FFC400, #FFD700, #4CAF50, #2196F3, #9C27B0); /* Multicolor gradient */
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent; /* Make text transparent */
+      font-size: 70px;
+      margin-bottom: 20px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: black;
+      padding: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white; /* Change link color to black */
+      font-weight: bold;
+      margin: 10px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    nav button {
+      background-color: #ADD8E6;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    nav button:hover {
+      background-color: #FFC400;
+    }
+
+    main {
+      padding: 0;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* New styles for logo */
+    header {
+      position: relative;
+    }
+
+    img.logo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 100px; /* Adjust the size as needed */
+      height: auto;
+    }
+
+    /* New styles for features box */
+    #featuresText, #helpText, #contactText {
+      display: none;
+      background-color: #ffffcc; /* Light yellow background */
+      color: black; /* Black text */
+      padding: 20px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img class="logo" src="{{ url_for('static', filename='logo.jpg') }}">
+    <h1>CHROMACLEAR</h1>
+  </header>
+  <nav>
+    <a href="#Home">Home</a>
+    <a href="#Features" onclick="showFeatures()">Features</a> <!-- Added onclick event -->
+    <a href="#Help" onclick="showHelp()">Help</a> <!-- Added onclick event -->
+    <a href="#Contact" onclick="showContact()">Contact</a> <!-- Added onclick event -->
+    <button onclick="redirectToEnhanceImage()">Enhance Image</button> <!-- Modified onclick event -->
+    <button onclick="redirectToRealTimeCapture()">Real Time Capture</button> <!-- Added onclick event -->
+    <button onclick="redirectToExtension()">Extension</button> <!-- Added onclick event -->
+  </nav>
+  <main>
+    <video autoplay muted loop>
+      <source src="{{ url_for('static', filename='video.mp4') }}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </main>
+
+  <!-- Features text box -->
+  <div id="featuresText">
+    <li>FEATURES</li>
+    <ol>
+      <li>ENHANCE IMAGE: Input image from gallery and enhance it so that colorblind person can distinguish colors.</li>
+      <li>COLOR IDENTIFICATION USING CURSOR: When cursor is moved over the image, color at that particular point is identified and displayed.</li>
+      <li>REAL TIME IMAGE AND VIDEO CAPTURE: Allows user to capture images and videos through device camera and image enhancement is done so that people with color blindness can distinguish colors.</li>
+      <li>EXTENSION FOR COLORBLIND USERS: Converts webpages so that color blind users can distinguish the colors they view on a webpage depending upon their type of color blindness.</li>
+      <li>EXTENSION FOR DEVELOPERS: Converts webpages so that developers can see how a color-blind person views webpages. This is for knowledge and education of the developers.</li>
+    </ol>
+  </div>
+
+  <!-- Help text box -->
+  <div id="helpText">
+    <li>HELP</li>
+    <ol>
+      <li>ENHANCE IMAGE:</li>
+      <ol type="a">
+        <li>Click on enhance image button at the top.</li>
+        <li>You will be directed to a new page.</li>
+        <li>Click the choose file button.</li>
+        <li>Choose input image from gallery. It will be shown on the first box.</li>
+        <li>Click convert button.</li>
+        <li>The converted image is displayed on the second box.</li>
+        <li>Place the cursor anywhere on the image. Color at that particular point will be displayed.</li>
+      </ol>
+      <li>REAL TIME CAPTURE:</li>
+      <ol type="a">
+        <li>Click on real time capture button at the top.</li>
+        <li>You will be directed to a new page.</li>
+        <li>Capture image from camera or take a video using camera on the device.</li>
+        <li>The converted image or video will be displayed.</li>
+      </ol>
+      <li>EXTENSION:</li>
+      <ol type="a">
+        <li>Click on extension button.</li>
+        <li>Choose whether you are a user or developer.</li>
+        <li>Depending on your choice, the 2 extensions will be displayed.</li>
+      </ol>
+    </ol>
+  </div>
+
+  <!-- Contact text box -->
+  <div id="contactText">
+    <p>WE ARE HERE TO HELP!</p>
+    <p>CONTACT OUR TEAM:</p>
+    <p>9947658297</p>
+    <p>colourblindteam@gmail.com</p>
+  </div>
+
+  <script>
+    function showFeatures() {
+      var featuresText = document.getElementById("featuresText");
+      featuresText.style.display = "block";
+      window.location.href = "#featuresText"; // Scroll to the features section
+    }
+
+    function showHelp() {
+      var helpText = document.getElementById("helpText");
+      helpText.style.display = "block";
+      window.location.href = "#helpText"; // Scroll to the help section
+    }
+
+    function showContact() {
+      var contactText = document.getElementById("contactText");
+      contactText.style.display = "block";
+      window.location.href = "#contactText"; // Scroll to the contact section
+    }
+
+    // Function to handle click event of the "Enhance Image" button
+    function redirectToEnhanceImage() {
+      window.location.href = "/imgupload"; // Redirect to the enhance image HTML file
+    }
+
+    // Function to handle click event of the "Real Time Capture" button
+    function redirectToRealTimeCapture() {
+        window.location.href = "/realtime"; // Redirect to the Flask route for real-time capture
+    }
+
+    // Function to handle click event of the "Extension" button
+    function redirectToExtension() {
+      window.location.href = "/extensions"; // Redirect to the extension HTML file
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Color Blindness Simulation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9; /* Light grey background */
+            color: #333; /* Dark grey text */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #videoStream {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            background-color: #6a5acd; /* Slate blue color for buttons */
+            color: #fff; /* White text */
+            border: none;
+            padding: 15px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.2rem;
+            margin: 15px;
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #483d8b; /* Dark slate blue color on hover */
+        }
+
+        .icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Real-Time Color Blindness Simulation</h1>
+    <div id="videoStream"></div>
+    <div>
+        <button id="tritanopiaButton" class="button"><i class="fas fa-eye-slash icon"></i>Tritanopia</button>
+        <button id="deuteranopiaButton" class="button"><i class="fas fa-eye-slash icon"></i>Deuteranopia</button>
+        <button id="protanopiaButton" class="button"><i class="fas fa-eye-slash icon"></i>Protanopia</button>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        // Function to start camera stream with specified blindness type
+        function startCamera(blindnessType) {
+            var videoStream = document.getElementById('videoStream');
+            var url = '/simulate_color_blindness?type=' + blindnessType;
+            
+            // Start camera stream
+            videoStream.innerHTML = '<img src="' + url + '" id="cameraFeed" style="width:100%;"/>';
+
+            // Update the URL when the corresponding button is clicked
+            $('#tritanopiaButton').click(function() {
+                $('#cameraFeed').attr('src', '/simulate_color_blindness?type=tritanopia');
+            });
+
+            $('#deuteranopiaButton').click(function() {
+                $('#cameraFeed').attr('src', '/simulate_color_blindness?type=deuteranopia');
+            });
+
+            $('#protanopiaButton').click(function() {
+                $('#cameraFeed').attr('src', '/simulate_color_blindness?type=protanopia');
+            });
+        }
+
+        // Call startCamera function with default blindness type when the page is loaded
+        $(document).ready(function() {
+            startCamera('tritanopia');
+        });
+    </script>
+</body>
+</html>
