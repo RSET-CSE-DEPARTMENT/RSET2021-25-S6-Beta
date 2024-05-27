@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Converter</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #ffffcc, #ffffff);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 50px;
+        }
+
+        .uploadLabel {
+            font-size: 24px;
+            font-weight: bold;
+            color: black;
+            margin-bottom: 10px;
+        }
+
+        .imageBox {
+            width: 40%;
+            height: 300px;
+            border: 2px solid black;
+            background-image: linear-gradient(to bottom right, #ffffcc, #ccffcc);
+            margin-right: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .imageBox img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            margin: auto;
+        }
+
+        .uploadText {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: black;
+            margin: 10px;
+        }
+
+        .uploadSection {
+            margin-top: 2cm;
+        }
+
+        .textbox {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: black;
+            margin-top: 10px;
+        }
+
+        #convertButton {
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        #colorblindnessType {
+            font-size: 24px;
+            color: black;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+    <div class="uploadSection">
+        <label for="uploadInput" class="uploadLabel">
+            <input type="file" id="uploadInput" accept="image/*">
+        </label>
+        <select id="colorblindnessType">
+            <option value="none">Normal Vision</option>
+            <option value="protanopia">Protanopia</option>
+            <option value="deuteranopia">Deuteranopia</option>
+            <option value="tritanopia">Tritanopia</option>
+        </select>
+        <button id="convertButton" onclick="convertImage()">Convert</button>
+    </div>
+
+    <div class="imageBox" id="uploadedImageBox">
+        <img id="uploadedImage" src="#" alt="Uploaded Image" onmousemove="showHoveredColor(event, 'uploaded')">
+    </div>
+
+    <div class="imageBox" id="convertedImageBox">
+        <img id="convertedImage" src="#" alt="Converted Image" onmousemove="showHoveredColor(event, 'converted')">
+    </div>
+</div>
+
+<p class="textbox" id="outputText"></p>
+
+<script>
+    function convertImage() {
+        var formData = new FormData();
+        var fileInput = document.getElementById('uploadInput');
+        var selectedFile = fileInput.files[0];
+        formData.append('file', selectedFile);
+
+        var dropdown = document.getElementById('colorblindnessType');
+        var selectedOption = dropdown.options[dropdown.selectedIndex].value;
+        formData.append('colorblindnessType', selectedOption);
+
+        fetch('/convert_image', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('convertedImage').src = 'data:image/jpeg;base64,' + data;
+            document.getElementById('convertedImageBox').style.display = 'block';
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    document.getElementById('uploadInput').addEventListener('change', function(event) {
+        var uploadedImage = document.getElementById('uploadedImage');
+        var uploadedImageBox = document.getElementById('uploadedImageBox');
+        var file = event.target.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            uploadedImage.src = e.target.result;
+            uploadedImageBox.style.display = 'block';
+        };
+
+        reader.readAsDataURL(file);
+    });
+
+    function showHoveredColor(event, target) {
+        var image;
+        if (target === 'uploaded') {
+            image = document.getElementById('uploadedImage');
+        } else if (target === 'converted') {
+            image = document.getElementById('convertedImage');
+        }
+        var x = event.offsetX;
+        var y = event.offsetY;
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext('2d');
+        canvas.width = image.width;
+        canvas.height = image.height;
+        ctx.drawImage(image, 0, 0, image.width, image.height);
+        var pixel = ctx.getImageData(x, y, 1, 1).data;
+        var r = pixel[0];
+        var g = pixel[1];
+        var b = pixel[2];
+        fetch('/get_color', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({r: r, g: g, b: b})
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('outputText').textContent = 'Hovered Color: ' + data.color;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
+
+</body>
+</html>

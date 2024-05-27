@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Red to Grey Image Filter",
+  "version": "1.0",
+  "description": "Converts all shades of red in an image to grey using SVG filter",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"]
+    }
+  ]
+}
