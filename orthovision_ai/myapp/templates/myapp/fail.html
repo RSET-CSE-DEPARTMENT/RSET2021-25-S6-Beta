@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html style="height: 100%; background-image: linear-gradient(135deg, rgb(244, 234, 238), rgb(226, 77, 136)); font-family: Arial, Helvetica, sans-serif;">
+
+<head>
+    <title>preview</title>
+</head>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        overflow: hidden; /* Hide scrollbars initially */
+    }
+
+    .center {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #000;
+    }
+
+    .wave {
+        width: 5px;
+        height: 100px;
+        background: linear-gradient(45deg, cyan, #fff);
+        margin: 10px;
+        animation: wave 1s linear infinite;
+        border-radius: 20px;
+    }
+
+    @keyframes wave {
+        0% {
+            transform: scale(0);
+        }
+        50% {
+            transform: scale(1);
+        }
+        100% {
+            transform: scale(0);
+        }
+    }
+
+    .header {
+        height: 80px;
+        width: 100vw;
+        background-image: linear-gradient(135deg, rgb(40, 42, 43), rgb(217, 217, 226));
+        padding-top: 5px;
+        padding-left: 17px;
+        display: flex;
+        align-items: center;
+    }
+
+    .title {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 45px;
+        margin-left: -15px;
+        color: aliceblue;
+        text-shadow: 2px 2px 6px black;
+    }
+
+    .some {
+        width: 400px;
+        height: 85px;
+        margin-left: 375px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .button {
+        padding: 10px 20px;
+        font-size: 20px;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .button:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .main {
+        background-color: rgba(255, 255, 255, 0.9);
+        width: 60%;
+        height: 580px;
+        margin-left: 20%;
+        margin-top: 60px;
+        border-radius: 10px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+        padding-top: 5px;
+    }
+
+    input,
+    select {
+        width: 85%;
+        height: 30px;
+        border-color: rgb(200, 200, 200);
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        padding: 5px;
+    }
+</style>
+
+<body>
+    <script>
+        setTimeout(() => {
+            const box = document.getElementById('loading');
+            loading.style.display = 'none';
+        }, 1000);
+    </script>
+
+    <div id="loading" class="center">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <div class="header">
+        <div class="title" style="width: 700px">
+            <h1>Ortho Vision AI</h1>
+        </div>
+        <div class="some">
+            <a class="button" href="{% url 'upload' %}">Home</a>
+            <a class="button" href="{% url 'login' %}">Logout</a>
+        </div>
+    </div>
+
+    <div class="main">
+        <h1 style="margin-top:35px;text-align: center;">No fracture detected by the model</h1><br>
+        <div style="text-align: center;">
+
+        </div>
+        <!-- Align Choose File and Upload buttons -->
+        <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+            <div style="position: relative; display: inline-block; overflow: hidden; margin-bottom: 20px;">
+                <div style="text-align: center;">
+                    <img src="{{ fail.img.url }}" class="img-responsive" style="max-width: 100%; max-height: 50vh; margin: auto; display: block;" />
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="footer" style="text-align: center; color: whitesmoke; padding-top: 5px;">© 2021-2025 JKG. All rights Reserved. Developed by JGS1</div>
+</body>
+
+</html>
