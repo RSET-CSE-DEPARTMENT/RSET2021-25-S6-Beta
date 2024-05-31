@@ -1,0 +1,51 @@
+User_id,Concern,Oily T-Zone,Tight After Cleansing,Dry Patches,Reacts to Products,Redness/Stinging,Sun Sensitivity,Skin Type
+U001,Acne Breakouts,Yes,No,No,No,No,Burns Easily, Oily Skin
+U002,Uneven Skin Tone,No,Yes,Rarely,Yes,Rarely,Rarely Burns,Dry Skin
+U003,Sensitive Skin,Rarely,No,Yes,Yes,Yes,Burns Easily,Sensitive Skin
+U004,Dry and Flaky Skin,No,Yes,Daily,No,No,Rarely Burns,Dry Skin
+U005,Large Pores,Yes,No,No,No,No,Burn Easily,Oily Skin
+U006,Dullness and Lack of Radiance,Rarely,Rarely,No,No,No,Rarely Burns,Normal Skin
+U007,Anti-Aging Concerns,Rarely,No,No,No,No,Rarely Burns,Normal Skin
+U008,Blackheads and Congestion,Rarely,Daily,No,No,No,No,Normal Skin
+U009,Normal Skin,Rarely,No,No,Rarely,Rarely,Rarely Burns,Normal Skin
+U010,Sensitive and Dry Skin,No,No,Yes,Daily,Yes,Often,Sensitive Skin
+U011,Uneven Skin Tone & Dark Circles,No,Yes,Often,No,Rarely,Burn Easily,Dry Skin
+U012,Early Signs of Aging,No,No,No,No,Rarely,Rarely Burns,Normal Skin
+U013,Irritated Skin,Often,No,Yes,Rarely,Yes,Often,Sensitive Skin
+U014,Stubborn Blackheads,No,Daily,No,No,No,No,Normal Skin
+U015,Large Pores & Shine,Yes,Yes,No,No,No,No,Oily Skin
+U016,Dullness & Uneven Texture,No,Rarely,Yes,Rarely,No,Rarely Burns,Normal Skin
+U017,Concerns with Acne Scars,Rarely,Yes,No,No,No,Rarely Burns,Normal Skkin
+U018,Uneven Skin Tone & Hyperpigmentation,Yes,No,No,Rarely,Rarely,Often,Oily Skin
+U019,Large Pores & Blackheads,Often,Daily,No,No,No,No,Normal Skin
+U020,Sensitive Skin & Dryness,No,Daily,Yes,Daily,Yes,Often,Sensitive Skin
+U021,Uneven Skin Tone & Redness,Rarely,Yes,Rarely,Rarely,Often,Burn Easily,Sensitive Skin
+U023,Uneven Skin Tone & Dullness,No,No,Yes,Rarely,Rarely,Rarely Burns,Sensitive Skin
+U024,Fine Lines & Loss of Elasticity,Often,No,No,No,Rarely,Rarely Burns,Sensitive Skin
+U025,Acne Breakouts & Blackheads,Yes,Rarely,No,No,Rarely,Rarely Burns,Oily Skin
+U026,Sensitive Skin & Itchiness,Often,No,Yes,Daily,Often,Often,Sensitive Skin
+U027,Uneven Skin Tone & Sun Damage,No,No,No,Rarely,Rarely,Rarely Burns,Normal Skin
+U028,Concerns with Hyperpigmentation,Rarely ,Yes,No,No,Rarely,Rarely Burns,Normal Skin
+U029,Sensitive Skin & Dry Patches,Often,No,Yes,Daily,Often,Rarely Burns,Dry Skin
+U030,Dryness & Itchiness,No,No,Yes,Daily,Rarely,No,Dry Skin
+U031,Uneven Skin Tone & Sun Damage,Rarely,No,Yes,Rarely,Rarely,Rarely Burns,Dry Skin
+U032,Acne Breakouts & Blackheads,Yes,Daily,No,No,No,No,Oily Skin
+U033,Concerns with Hyperpigmentation,Often,No,No,No,Rarely,Rarely Burns,Normal Skin
+U034,Sensitive Skin & Dry Patches,No,No,Yes,Rarely,Often,Rarely Burns,Sensitive and Dry Skin
+U035,Large Pores & Blackheads,Yes,No,No,Rarely,Rarely,Burn Easily,Oily Skin
+U036,Uneven Skin Tone,No,Yes,Rarely,Rarely,Yes,Rarely Burns,Dry Skin
+U037,Sensitive Skin & Dryness,No,No,Daily,Often,Often,Rarely Burns,Sensitive and Dry
+U038,Normal Skin,Yes,Rarely,Yes,Rarely,Rarely,Burn Easily,Sensitive Skin
+U039,Early Signs of Aging,No ,No,No,No,Rarely,Rarely Burns,Normal Skin
+U040,Acne Breakouts & Blackheads,Often,Daily,No,No,Daily,Often,Oily and Sensitive Skin
+U041,Mature Skin Concerns,No,Yes,Daily,No,No,No,Normal Skin
+U042,Uneven Skin Tone & Dullness,No,No,Rarely,Rarely,Rarely, Rarely Burns,Normal Skin
+U043,Sensitive Skin & Itchiness,No,No,Yes,Daily,Often,Often,Sensitive Skin
+U044,Large Pores & Excess Oil,Yes,Daily,No,No,Rarely,Rarely Burns,Oily Skin
+U045,Sensitive Skin & Dry Patches,Rarely,No,Daily,Yes,Often,Rarely Burns,Sensitive and Dry Skin
+U046,Uneven Skin Tone & Hyperpigmentation,Often,Rarely,No,No,Rarely,Often,Normal Skin
+U047,Acne Breakouts & Blackheads,Yes,Daily,No,No,Daily,Often,Oily and Sensitive Skin
+U048,Dullness & Uneven Texture,No,Rarely,Yes,Rarely,Rarely,Rarely Burns,Dry Skin
+U049,Fine Lines & Loss of Elasticity,No,No,No,No,Rarely,Rarely Burns,Normal Skin
+U050,Sensitive Skin & Redness,Often,No,Yes,Daily,Daily,Often,Sensitive and Dry Skin
+U050,Mature Skin Concerns,Rarely,Yes,Daily,Rarely,Rarely,Rarely Burns,Sensitive and DrySkin
