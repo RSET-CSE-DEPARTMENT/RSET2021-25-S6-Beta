@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,600;1,200;1,300&display=swap"
+    />
+  </head>
+  <body>
+    <div class="wireframe-1">
+      <div class="wireframe-1-child"></div>
+      <img class="wireframe-1-item" alt="" src="c:\Users\jeeva\OneDrive\Pictures\Screenshots\Screenshot 2024-05-14 074416.png" />
+
+      <img class="wireframe-1-inner" alt="c:\Users\jeeva\OneDrive\Pictures\Screenshots\Screenshot 2024-05-14 081156.png" src="c:\Users\jeeva\OneDrive\Pictures\Screenshots\Screenshot 2024-05-14 082208.png" />
+
+      <div class="rectangle-parent">
+        <div class="group-child"></div>
+        <div class="group-parent">
+          <div class="group-container">
+            <div class="group-div">
+              <div class="group-div">
+                <div class="login">Login</div>
+              </div>
+              <img class="group-item" alt="" src="./public/group-2.svg" />
+            </div>
+            <div class="group-parent1">
+              <input class="group-inner" placeholder="User Id" type="text" />
+
+              <input
+                class="group-input"
+                placeholder="Password"
+                type="password"
+              />
+            </div>
+            <button class="forgot-password">Forgot password?</button>
+          </div>
+          <button class="rectangle-group" data-animate-on-scroll>
+            <div class="rectangle-div"></div>
+            <div class="login-container">
+              <div class="login1">LOGIN</div>
+            </div>
+          </button>
+          <button class="click-here-to-container">
+            <i class="click-here-to">Click here to register</i>
+            <span class="sign-up"> Sign up</span>
+          </button>
+        </div>
+      </div>
+      <div class="wireframe-1-child1"></div>
+      <div class="frame-div"></div>
+      <div class="wireframe-1-child2"></div>
+      <div class="wireframe-1-child3"></div>
+    </div>
+
+    <script>
+      var scrollAnimElements = document.querySelectorAll("[data-animate-on-scroll]");
+      var observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting || entry.intersectionRatio > 0) {
+              const targetElement = entry.target;
+              targetElement.classList.add("animate");
+              observer.unobserve(targetElement);
+            }
+          }
+        },
+        {
+          threshold: 0.15,
+        }
+      );
+      
+      for (let i = 0; i < scrollAnimElements.length; i++) {
+        observer.observe(scrollAnimElements[i]);
+      }
+      </script>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "dask": "^1.0.201803221328",
+    "python-shell": "^5.0.0"
+  }
+}
