@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "65229343084",
+    "project_id": "skkn-auth",
+    "storage_bucket": "skkn-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:65229343084:android:da1d0ff9940ca2ee960b49",
+        "android_client_info": {
+          "package_name": "com.example.skkn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuEQTbdTU2GfLRrQhw8xcsTtI7Ahxay4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
