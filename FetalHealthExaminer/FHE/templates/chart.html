@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart {
+            width: 600px;
+            height: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<div class="chart">
+    <canvas id="chart1"></canvas>
+</div>
+<body>
+    <script>
+        function drawGraph(canvasId, yValues, xValues, label) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+
+            // Set canvas dimensions
+            canvas.width = 300;
+            canvas.height = 300;
+
+            // Define the data
+            const data = {
+                labels: xValues,
+                datasets: [{
+                    label: label,
+                    data: yValues,
+                    backgroundColor: 'rgba(40, 154, 40, 0.6)',
+                    borderColor: 'rgba(40, 154, 40, 1)',
+                    borderWidth: 1
+                }]
+            };
+
+    // Configure the chart
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        boxWidth: 10,
+                        font: {
+                            size: 10 // Adjust the font size for the legend labels
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    // Create the chart
+    new Chart(ctx, config);
+    
+}
+const xvalues = [];
+const yvalues = [];
+const labels=[
+    "HEART RATE", 
+    "ACCELERATIONS PER/S",
+    "", 
+    'UTERINE CONTRACTION PER/S', 
+    "","","",
+    '% OF TIME WITH ABNORMAL SHORT-TERM VARIABILITY',
+    "",
+    '% OF TIME WITH ABNORMAL LONG-TERM VARIABILITY'
+]
+var count = 1;
+const weekdatas = JSON.parse('{{ weekdatas|safe }}');
+const chart_type = '{{ chart_type }}';
+
+for (let weekdata in weekdatas) {
+    xvalues.push(count);
+    count++;
+    yvalues.push(weekdatas[weekdata].fields.numbers[chart_type]);
+    count++;
+}
+
+drawGraph('chart1', yvalues, xvalues, labels[chart_type]);</script>
+</body>
+</html>

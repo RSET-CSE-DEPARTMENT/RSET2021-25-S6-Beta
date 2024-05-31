@@ -1,0 +1,218 @@
+{% load static %}
+<!DOCTYPE html>
+<html style="height:100%;  background-image:linear-gradient(135deg,rgb(244, 234, 238),rgb(226, 77, 136));">
+<head>
+    <title>OrthoVision-Login</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .no-scroll {
+        overflow: hidden !important;
+        /* Override potential other styles */
+    }
+
+    .center {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #000;
+    }
+
+    .wave {
+        width: 5px;
+        height: 100px;
+        background: linear-gradient(45deg, cyan, #fff);
+        margin: 10px;
+        animation: wave 1s linear infinite;
+        border-radius: 20px;
+    }
+
+    .wave:nth-child(2) {
+        animation-delay: 0.1s;
+    }
+
+    .wave:nth-child(3) {
+        animation-delay: 0.2s;
+    }
+
+    .wave:nth-child(4) {
+        animation-delay: 0.3s;
+    }
+
+    .wave:nth-child(5) {
+        animation-delay: 0.4s;
+    }
+
+    .wave:nth-child(6) {
+        animation-delay: 0.5s;
+    }
+
+    .wave:nth-child(7) {
+        animation-delay: 0.6s;
+    }
+
+    .wave:nth-child(8) {
+        animation-delay: 0.7s;
+    }
+
+    .wave:nth-child(9) {
+        animation-delay: 0.8s;
+    }
+
+    .wave:nth-child(10) {
+        animation-delay: 0.9s;
+    }
+
+    @keyframes wave {
+        0% {
+            transform: scale(0);
+        }
+
+        50% {
+            transform: scale(1);
+        }
+
+        100% {
+            transform: scale(0);
+        }
+    }
+
+    .main {
+        background-color: rgb(248, 244, 244);
+        width: 65%;
+        height: 600px;
+        margin-left: 255px;
+        margin-top: 100px;
+        border-radius: 15px;
+        box-shadow: 0px 10px 20px rgb(0 0 0/0.5);
+    }
+
+    .column {
+        background-size: 100% 100%;
+        height: 600px;
+    }
+
+    #tbox {
+        margin-left: 10%;
+        height: 35px;
+        width: 75%;
+        border-radius: 50px;
+        padding-left: 20px;
+        background-color: rgb(226, 225, 225);
+        margin-bottom: 10px;
+        border-color: #fbfdfb;
+        border-style: solid;
+    }
+
+    .button {
+        background-color: #c57dcd;
+        width: 25%;
+        margin-top: 12px;
+        height: 45px;
+        border-radius: 50px;
+        border-color: #c57dcd;
+        color: white;
+        transition: transform 0.2s;
+    }
+    .button1 {
+        background-color: #ffffff;
+        width: 25%;
+        margin-top: 25px;
+        height: 45px;
+        border-radius: 50px;
+        border-color: #fdfdfd;
+        color: rgb(75, 173, 218);
+        transition: transform 0.2s;
+    }
+
+    #Login {
+        margin-right: 5%;
+        margin-left: 35%;
+    }
+    #Signup
+    {
+        margin-top: 25%;
+        margin-left: 2%;
+    }
+
+    #Login:hover {
+        transform: scale(1.2);
+    }
+
+    #Signup:hover {
+        transform: scale(1.2);
+    }
+
+    ul.messages {
+        list-style-type: none;
+        color: red;
+        font-size: 14px;
+        margin-left: 27%;
+        margin-top: 10px;
+    }
+</style>
+
+<body>
+    <script>
+        setTimeout(() => {
+            const box = document.getElementById('loading');
+            loading.style.display = 'none';
+        }, 1000);
+
+        function redirect() {
+            window.location.href = 'https://www.google.com/';
+        }
+    </script>
+    <div id="loading" class="center">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+    <div>
+        <div class="main">
+            <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                <div class="column left" style="width: 40%; background-image: url(static/images/login.JPEG); border-radius: 15px 0px 00px 15px;">
+
+                </div>
+                <div class="column right" style="width: 60%;">
+                    <div style="background-image: url(static/images/background.JPEG); height: 90px; border-radius: 0px 15px 00px 00px;">
+                        <div><h1 style="font-size: xx-large; margin-left: 33%; color: #fbfdfb; margin-top: 0px; padding-top: 25px;">Ortho Vision AI</h1></div>
+                    </div>
+                    <h3 style="font-size: x-large; margin-left: 11%; margin-top: 90px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; color: #070e07;">LOGIN</h3>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <input id="tbox" placeholder="Username" name="username" type="text" required><br><br>
+                        <input id="tbox" placeholder="Password" name="password" type="password" required><br>
+                        <input name="Login" type="submit" class="button" id="Login" value="LOGIN">
+                    </form>
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <div style="margin-left: 33%; margin-top: 10px;">
+                        <span style="font-size: 18px; color: #333;">Not a user? </span>
+                        <a href="{% url 'signup' %}" class="button1" id="Signup">Sign up here</a>
+                    </div>
+                    <div style="background-image: url(21.png); height: 92px; margin-top: 70px; border-radius: 0px 0px 15px 0px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <style>
+        /* Basic styling for the registration form */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            /* Set the background image */
+            background-image: url('{% static "background1.png" %}'); /* Change 'background1.jpg' to your image file path */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 400px;
+            background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            padding-right: 40px;
+        }
+
+        .form-container {
+            padding: 20px;
+            color: white; /* Text color inside the black container */
+            background-color: rgba(255, 255, 255, 0.1); /* Transparent white */
+            border-radius: 10px; /* Adjust as needed */
+        }
+
+        h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-align: center; /* Center the text */
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.5); /* Transparent white for input fields */
+            color: rgb(255, 255, 255); /* Font color */
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .signup-link {
+            text-align: center;
+            color: #fff;
+            margin-top: 10px; /* Add margin to separate from the button */
+        }
+
+        .signup-link a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <title>Registration Form</title>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Sign Up</h2>
+            <form id="register-form">
+                <input type="text" id="register-username" placeholder="Username" required>
+                <input type="text" id="register-email" placeholder="Email" required>
+                <input type="text" id="register-specialisation" placeholder="Specialisation" required>
+                <input type="text" id="register-ph-no" placeholder="Phone No" required>
+                <input type="text" id="register-hospital-name" placeholder="Hospital Name" required>
+                <input type="text" id="register-city" placeholder="City" required>
+                <input type="password" id="register-create-password" placeholder="Create Password" required>
+                <input type="password" id="register-confirm-password" placeholder="Confirm Password" required>
+
+                <button type="submit">Register</button>
+
+                <div class="signup-link">
+                    <p>Already have an account? <a href="/login">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const registerForm = document.getElementById("register-form");
+
+            registerForm.addEventListener("submit", function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById("register-username").value;
+                const email = document.getElementById("register-email").value;
+                const specialisation = document.getElementById("register-specialisation").value;
+                const phNo = document.getElementById("register-ph-no").value;
+                const hospitalName = document.getElementById("register-hospital-name").value;
+                const city = document.getElementById("register-city").value;
+                const createPassword = document.getElementById("register-create-password").value;
+                const confirmPassword = document.getElementById("register-confirm-password").value;
+                
+            fetch('http://127.0.0.1:8000/signin/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: createPassword,
+                    email: email,
+                    specialisation: specialisation,
+                    phNo: phNo,
+                    hospitalName: hospitalName,
+                    city: city
+                })
+            })
+            .then(response => {
+                if (response.ok) {  
+                    console.log('Sign in successful!');
+                    console.log(response);
+                    const isRegistrationSuccessful = true; 
+                    // Sign in successful, redirect to another page
+                    //window.location.href = "dashboard.html";
+                    window.location.href = "/login";
+                } else {
+                    const isRegistrationSuccessful = false; 
+                    // Sign in failed, display error message (optional)
+                    alert("Sign in failed! Please check your credentials.");
+                }
+            })
+            .catch(error => {
+                // Handle any errors that occurred during the request
+                console.error('Error:', error);
+            });
+  e.preventDefault();  
+ 
+  
+
+  if (isRegistrationSuccessful) {
+    window.location.href = "doc.html";  
+  } else {
+    // Display error message (optional)
+    alert("Registration failed! Please ensure all fields are filled correctly.");
+  }
+});
+
+           
+            
+        });
+    </script>
+</body>
+</html>

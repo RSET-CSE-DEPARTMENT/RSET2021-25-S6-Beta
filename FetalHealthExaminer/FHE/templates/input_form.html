@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Input Integers</title>
+</head>
+<body>
+    <h1>Enter Integers</h1>
+    <form id="integerForm">
+        {% csrf_token %}
+        <div>
+            {% for i in range %}
+            <label for="integer_{{ forloop.counter }}">Integer {{ forloop.counter }}:</label>
+            <input type="text" id="integer_{{ forloop.counter }}" name="integer_{{ forloop.counter }}"><br>
+            {% endfor %}
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        console.log('Hello');
+        const form = document.getElementById('integerForm');
+        const processIntergersUrl = '{{ process_integers_url }}'
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const integers = [];
+            for (let i = 1; i <= 21; i++) {
+                const input = document.getElementById(`integer_${i}`);
+                const value = parseFloat(input.value);
+                if (!isNaN(value)) {
+                    integers.push(value);
+                    
+                }
+            }
+            fetch(processIntergersUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({ integers: integers })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('result');
+                if (data.error) {
+                    console.log(data.error);
+                    resultDiv.textContent = `Error: ${data.error}`;
+                } else {
+                    console.log(data.result);
+                    resultDiv.textContent = `Result: ${data.result}`;
+                }
+            })
+            .catch(error => {
+                const resultDiv = document.getElementById('result');
+                resultDiv.textContent = `Error: ${error}`;
+            });
+        });
+    </script>
+</body>
+</html>

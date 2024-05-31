@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <style>
+        /* Basic styling for the login form */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            /* Set the background image */
+            background-image: url('{% static "background1.png" %}'); /* Change 'background.jpg' to your image file path */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 400px;
+            background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            padding-right: 40px;
+        }
+
+        .form-container {
+            padding: 20px;
+            color: white; /* Text color inside the black container */
+            border-radius: 10px; /* Adjust as needed */
+        }
+
+        h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-align: center; /* Center the text */
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.5); /* Transparent white for input fields */
+            color: rgb(255, 255, 255); /* Font color */
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px; /* Add margin to separate from the link */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .signup-link {
+            text-align: center;
+            color: #fff;
+        }
+
+        .signup-link a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <title>Login Form</title>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Login</h2>
+            <form id="login-form">
+                <input type="text" id="login-username" placeholder="Username" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+
+                <button type="submit">Login</button>
+
+                <div class="signup-link">
+                    <p>Don't have an account? <a href="/signup">Sign up</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const loginForm = document.getElementById("login-form");
+            const usern = document.getElementById("login-username");
+            usern.textContent = "";
+            loginForm.addEventListener("submit", function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById("login-username").value;
+                const password = document.getElementById("login-password").value;
+                console.log(username)
+                fetch("http://127.0.0.1:8000/login_user/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ username: username, password: password })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.log(data);
+                        console.log(data.error);
+                        alert(data.error);
+                    } else {
+                        alert("Login successful!");
+                        // Redirect to another page
+                        window.location.href = "/doctor/";
+                    }
+                })
+                .catch(error => {
+                    alert("An error occurred. Please try again.");
+                });
+            });
+        });
+    </script>
+</body>
+</html>

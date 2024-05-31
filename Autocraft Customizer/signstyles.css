@@ -1,0 +1,32 @@
+.main{
+    margin-left: 43%;
+    margin-top: 10%;
+    background-color: rgb(31, 30, 30);
+    color: white;
+    font-size: 20px;
+}
+label{
+    font-size: 20px;
+}
+.input,.Email{
+    background: none;
+    border: none;
+    outline: none;
+    max-width: 190px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 9999px;
+    box-shadow: inset 2px 5px 10px rgb(5, 5,5);
+    color: #fff;
+}
+#signhead{
+    font-size: 30px;
+    margin-left: 5%;
+  }
+#signupp{
+    margin-left: 58px;
+  color: aliceblue;
+  background-color: rgb(96, 96, 96);
+  padding: 5px 15px;
+  border-radius: 5px;
+}

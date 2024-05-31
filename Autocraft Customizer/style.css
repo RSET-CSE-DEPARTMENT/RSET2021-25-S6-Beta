@@ -1,0 +1,153 @@
+body{
+  background-color: black;
+}
+html{
+  scroll-behavior: smooth;
+}
+
+.image-button-container {
+  display: flex; /* Use flexbox to align items */
+  align-items: center; /* Align items vertically */
+  margin-left: 20px;
+  padding-bottom: 10px;
+}
+
+.image-button-container img {
+  margin-right: 10px; /* Add some spacing between the image and button */
+}
+img{
+  margin-right: 1400px;
+}
+#racing{
+  margin-left: 50px;
+  background-color: rgba(0,0,0,0);
+  color: white;
+  border-color: rgba(0,0,0,0);
+}
+#customize{
+  height: 500px;
+  width: 400px;
+  margin-left: 45%;
+  background-color: rgba(0,0,0,0);
+  color: white;
+  border-color:rgba(0,0,0,0)
+}
+#about{
+  width:100%;
+  margin-left: 5px;
+  background-color: rgba(0,0,0,0);
+  color: white;
+  border-color: rgba(0,0,0,0);
+}
+#aboutus{
+  width: 100%;
+  top: 50%;
+  left:50%;
+}
+#contact{
+  margin-left:5px;
+  background-color: rgba(0, 0, 0,0);
+  color: white;
+  border-color: rgba(0,0,0,0);
+}
+#bg{
+  padding-top: 10px;
+}
+p{
+color: white;
+width: 80%;
+height: 80%;
+font-size: 20px;
+}
+nav a {
+  margin: 0 15px;
+  color: white;
+  text-decoration: none;
+}
+header {
+  background-color: #000000;
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+.image{
+  color: white;
+  width: fit-content;
+  height: fit-content;
+}
+#vid{
+  width: 100px;
+  height: 500px;
+}
+.text-overlay{
+  position: absolute;
+  width: 1400px;
+  height: 900px;
+  top: 50%; /* Place text at vertical center */
+  left: 55%; /* Place text at horizontal center */
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0); /* Semi-transparent black background */
+  color: white;
+  padding: 10px; /* Adjust padding as needed */
+  font-size: 150px; /* Adjust font size as needed */
+  text-align: center;
+}
+.cust{
+  position: absolute;
+  top: 50%;
+  left: 44%;
+  font-size: 30px;
+  opacity: 0.3;
+}
+.image-container {
+  position: relative;
+  width: 1400px;
+  height: 900px; /* Adjust the width of the container */
+}
+
+.image-container img {
+  width: 1500px;
+  height: 850px;
+  display: block;}
+
+#aboutp{
+  text-align: center;
+}
+label{
+  left: 50%;
+}
+input{
+  left: 50%;
+}
+#loghead{
+  font-size: 45px;
+  margin-left: 7%;
+}
+#username{
+  margin-top: 1%;
+  color: rgba(0,0,0,0);
+}
+#passl{
+  margin-top: 10px;
+}
+.input{
+  color: aliceblue;
+  background-color:rgba(0, 0, 0, 0);
+  border-color: aliceblue;
+  border-radius: 10px;
+
+}
+#loginn{
+  margin-left: 16%;
+  border-radius: 5px;
+  }
+#loginform{
+  height: fit-content;
+  width: fit-content;
+}
+label{
+  font-size: 20px;
+}
+#create{
+  margin-left: 12%;
+}
